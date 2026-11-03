@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Delivery Staff Login · Goan Craving</title><link rel="stylesheet" href="/css/style.css"></head>
-<body class="login-page"><main class="login-card"><div class="brand-mark">GC</div><p class="eyebrow">GOAN CRAVING</p><h1>Delivery portal</h1><p class="muted">Sign in to manage your assigned deliveries.</p>
+<body class="login-page"><main class="login-card"><div class="brand-mark">GC</div><p class="eyebrow">GOAN CRAVING</p><h1>Delivery portal</h1><p class="muted">Sign in with the Delivery Agent ID and password provided by your operations team.</p>
 <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
-<form method="post" action="/login"><label>Email address<input type="email" name="email" autocomplete="username" required></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label><button class="btn btn-primary btn-full" type="submit">Sign in <span>→</span></button></form>
+<form method="post" action="/login"><label>Delivery Agent ID<input type="text" name="agentId" autocomplete="username" autocapitalize="characters" required></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label><button class="btn btn-primary btn-full" type="submit">Sign in <span>→</span></button></form>
 <p class="login-foot">Delivery accounts are created by an authorized employee.</p></main></body></html>
