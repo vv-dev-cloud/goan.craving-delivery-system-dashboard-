@@ -8,6 +8,10 @@ const authRoutes = require('./routes/authRoutes');
 const deliveryRoutes = require('./routes/deliveryRoutes');
 
 const app = express();
+// Render and other hosted platforms terminate HTTPS at a reverse proxy.
+// Trust the platform proxy so express-session can set secure cookies correctly.
+if (process.env.NODE_ENV === 'production') app.set('trust proxy', 1);
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false, limit: '20kb' }));
