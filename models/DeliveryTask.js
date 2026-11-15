@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema({
   order: { type: mongoose.Schema.Types.ObjectId, ref: 'FoodOrder', required: true, unique: true, index: true },
   restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
   deliveryPerson: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, index: true },
-  assignmentId: { type: String, index: true, sparse: true },
+  assignmentId: { type: String, unique: true, index: true, sparse: true },
   status: {
     type: String,
     enum: ['pending_assignment', 'assigned', 'accepted', 'at_restaurant', 'picked_up', 'en_route', 'delivered', 'assignment_failed', 'delivery_failed', 'cancelled', 'returned'],
