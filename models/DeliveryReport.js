@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const deliveryReportSchema = new mongoose.Schema({
-  order: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true, index: true },
+  order: { type: mongoose.Schema.Types.ObjectId, ref: 'FoodOrder', required: true, index: true },
   deliveryBoy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
   result: { type: String, enum: ['DELIVERED', 'UNABLE_TO_DELIVER'], required: true },
   customerOtp: { type: String, select: false },
@@ -13,8 +13,8 @@ const deliveryReportSchema = new mongoose.Schema({
     index: true
   },
   employeeNote: String,
-  verifiedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  verifiedBy: mongoose.Schema.Types.ObjectId,
   verifiedAt: Date
-}, { timestamps: true });
+}, { timestamps: true, collection: 'deliveryreports' });
 
-module.exports = mongoose.model('DeliveryReport', deliveryReportSchema);
+module.exports = mongoose.models.DeliveryReport || mongoose.model('DeliveryReport', deliveryReportSchema, 'deliveryreports');
