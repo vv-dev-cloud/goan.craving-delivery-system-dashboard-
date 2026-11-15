@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
   try {
     const tasks = await DeliveryTask.find({
       deliveryPerson: req.session.user.id,
-      status: { $in: ['assigned', 'accepted', 'at_restaurant', 'picked_up', 'en_route', 'delivery_failed'] }
+      status: { $in: ['assigned', 'accepted', 'at_restaurant', 'picked_up', 'en_route'] }
     }).sort({ updatedAt: -1 }).populate('order').limit(100).lean();
     const orders = tasks.map(presentTask);
     const reports = await DeliveryReport.find({ deliveryBoy: req.session.user.id })
