@@ -118,7 +118,6 @@ router.post('/orders/:id/report', async (req, res, next) => {
     if (pending) return res.redirect('/delivery?notice=report-pending');
     await DeliveryReport.create({
       order: task.order, deliveryBoy: req.session.user.id, result,
-      customerOtp: String(req.body.customerOtp || '').trim().slice(0, 8),
       proofNote: String(req.body.proofNote || '').trim().slice(0, 1000)
     });
     task.events.push({ status: 'agent_report_submitted', actorId: req.session.user.id, actorRole: 'delivery', note: result });
