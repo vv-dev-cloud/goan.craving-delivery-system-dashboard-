@@ -19,7 +19,8 @@ function presentTask(task) {
   const order = task.order || {};
   const address = order.deliveryAddress || {};
   let officialStatus = statusToLegacy(order.orderStatus);
-  if (['picked_up', 'en_route'].includes(task.status)) officialStatus = 'OUT_FOR_DELIVERY';
+  if (task.status === 'picked_up') officialStatus = 'PICKED_UP';
+  if (task.status === 'en_route') officialStatus = 'OUT_FOR_DELIVERY';
   if (task.status === 'delivered') officialStatus = 'DELIVERED';
   return {
     _id: String(task._id),
@@ -108,7 +109,7 @@ router.post('/orders/:id/report', async (req, res, next) => {
   try {
     if (!mongoose.isValidObjectId(req.params.id)) return res.redirect('/delivery?notice=order-unavailable');
     const task = await DeliveryTask.findOne({
-      _id: req.params.id, deliveryPerson: req.session.user.id, status: { $in: ['picked_up', 'en_route'] }
+      _id: req.params.id, deliveryPerson: req.session.user.id, status: 'en_route'
     });
     if (!task) return res.redirect('/delivery?notice=order-unavailable');
     const result = String(req.body.result || '');
